@@ -1,24 +1,46 @@
+# Environment and sensitive keys
+.env
+.env.*
+*.env
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+package-lock.json.bak
+
+# Production builds
+dist/
+frontend/dist/
+build/
+
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
 
 # Databases
 instance/
 *.db
 *.sqlite3
 
-# Audio Outputs
+# Audio / temporary generated media
 audio/
 *.wav
-
-# Virtual environments
-venv/
-env/
-.env
+tts_*.mp3
+audio_*.wav
 
 # OS generated files
 .DS_Store
 Thumbs.db
-node_modules/
+desktop.ini

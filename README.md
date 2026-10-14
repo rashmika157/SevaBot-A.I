@@ -1,52 +1,54 @@
-# SevaBot 
+# SevaBot AI
 
-SevaBot is a full-stack web application designed to help citizens, farmers, and students easily discover, navigate, and apply for government schemes dynamically. It features a conversational AI system powered by NLP to intuitively match user symptoms, circumstances, or inputs with the correct benefits via cross-lingual accessibility.
+SevaBot AI is an intelligent, multilingual welfare assistance platform designed to help citizens, farmers, students, and workers discover, evaluate, and apply for central and state government schemes across India.
 
 ## Key Features
 
-- **Personalized Scheme Matching:** Intelligently matches users to exact schemes using dynamic database configurations algorithms.
-- **Multilingual UI Support:** Deep native translation mapping in English, Hindi, and Kannada.
-- **Fully-Fledged Voice AI:** Integrates with local speech-to-text (Whisper) and text-to-speech (MMS) models to talk directly with the citizen. 
-- **User Dashboard & Persistence:** Seamless UI allowing users to easily parse data, "Save to Dashboard", and trace tracked benefits directly synced via their profiles.
+- **Full-App Multilingual Switcher:** Real-time UI and speech translation across **English**, **Kannada (ಕನ್ನಡ)**, and **Hindi (हिंदी)**.
+- **Personalized Scheme Matching:** Step-by-step interactive questionnaire matching applicants against verified eligibility rules.
+- **Multilingual AI & Voice Assistant:** Conversational AI chatbot powered by LLM and state-machine fallback, supporting Speech-to-Text and Text-to-Speech in English, Kannada, and Hindi.
+- **Semantic & AI Search:** Natural language search and TF-IDF semantic search to find relevant welfare schemes based on situation descriptions.
+- **User Dashboard & Scheme Tracking:** Save schemes, view mandatory document checklists, and track application steps.
+- **Automated Test Suite:** Comprehensive test coverage for all API endpoints, access control, and sanitization.
 
-## Technology Stack
+## Architecture
 
-- **Frontend:** Pure HTML5, Vanilla JavaScript, and Modular CSS (No frameworks needed). Highly optimized.
-- **Backend:** Python +  Flask + SQLite 
-- **Artificial Intelligence Pipeline:** HuggingFace `transformers` (`openai/whisper-small` for STT, `facebook/mms-tts-kan` for TTS)
+- **Frontend (`frontend/`):** React 19 + Vite modern UI with custom glassmorphic styling, responsive layout, and dedicated `LanguageProvider`.
+- **Backend (`app.py` & `SevaBots-main/`):** Python Flask with SQLAlchemy SQLite database, HMAC token security, TF-IDF vectorization, Gemini LLM integration, Whisper STT, and Google TTS.
+- **Tests (`tests/`):** Pytest test suite validating security, endpoints, and data isolation.
 
-## Running the Project Locally
+## Getting Started
 
-### Prerequisites
-Make sure you have Python installed (Version 3.8+ recommended).
+### 1. Prerequisites
+- **Python**: 3.10+
+- **Node.js**: 18+ and `npm`
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/rashmika157/Sevabots.git
-   cd Sevabots
-   ```
+### 2. Backend Setup
+```bash
+# Install Python dependencies
+pip install -r SevaBots-main/requirements.txt
+pip install pytest pytest-mock gTTS
 
-2. **Install the required dependancies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+# Run the Flask backend server (port 5000)
+python app.py
+```
 
-3. **Start the localized database and web server:**
-   ```bash
-   python app.py
-   ```
-   *Note: On the first run, the system will automatically parse and seed the `schemes.json` file securely into the internal SQLite db! It will also download the HF models on the first voice prompt.*
+### 3. Frontend Setup
+```bash
+# Navigate to the React frontend
+cd frontend
 
-4. **Navigate to the web application:**
-   Open your browser and visit: `http://127.0.0.1:5000`
+# Install dependencies
+npm install
 
-## Deployment Instructions
+# Start development server (port 5173)
+npm run dev
+```
 
-The application is architecturally designed with relative URL endpoints (`/api/...`). This structurally implies you can host the repository seamlessly using a single unified pipeline! 
+### 4. Running Backend Tests
+```bash
+python -m pytest tests/test_api.py -v
+```
 
-1. Push your code exactly as it is to a GitHub repository.
-2. Connect the repository to a Python hosting cloud provider like **Render.com**, **Railway**, or **Heroku**.
-3. Specify the runtime command as `gunicorn app:app` (ensure you add `gunicorn` to your requirements if hosted externally).
-4. The service will naturally boot and serve up both your HTML interface and your backend routing logic underneath the same domain.
-
-
+## License
+MIT
